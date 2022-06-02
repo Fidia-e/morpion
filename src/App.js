@@ -1,14 +1,16 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 // import NotFound from "./components/NotFound";
-import Game from "./components/Game";
-import "../src/index.css";
+import Welcome from "./pages/welcome";
+import Morpion from "./pages/morpion";
+import "../src/index.scss";
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <Routes>
-        <Route path="/" element={<Game />} />
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="/" element={<Welcome user />} />
+        <Route path="/game" element={<Morpion user />} />
+        <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Routes>
     </div>
   );
