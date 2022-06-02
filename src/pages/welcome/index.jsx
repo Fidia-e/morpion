@@ -1,17 +1,18 @@
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../../styles/index.scss";
 
 const Welcome = () => {
   const [user, setUser] = useState("");
+  const navigate = useNavigate();
+
   const handleChange = (event) => {
     setUser(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setUser({ user });
-    <Navigate to="/game" replace={true} />;
+    navigate("/game");
 
     console.log("Arrête de regarder dans les placards des gens", user, "!");
   };

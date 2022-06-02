@@ -1,9 +1,6 @@
-// import { useState } from "react";
 import Board from "../Board";
 
 const Game = ({ user }) => {
-  // const [user, setUser] = useState("");
-
   return (
     <div className="game">
       <div>Hello {user}</div>
