@@ -24,11 +24,10 @@
 
 .welcomeCtn {
   width: 100%;
-  height: 50%;
-  margin: auto;
+  height: 80vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
 
   &__title {
     text-align: center;
@@ -42,12 +41,33 @@
     justify-content: center;
 
     &--input {
-      width: 200px;
-      height: 30px;
+      width: 250px;
+      height: 40px;
+      padding: 0.5rem;
+      border: solid 2px #112633ab;
+      margin-right: 0.5rem;
+      border-radius: 5px;
+      font-size: 1.3rem;
+
+      &:hover {
+        box-shadow: #23475f70 0px 7px 29px 0px;
+      }
+
+      &:focus {
+        border: solid 2px #ffc800;
+      }
     }
 
     &--btn {
-      width: 75px;
+      width: 100px;
+      background-color: #23475f;
+      color: #fff;
+      border-radius: 5px;
+      font-size: 1.3rem;
+
+      &:hover {
+        box-shadow: #23475f70 0px 7px 29px 0px;
+      }
     }
   }
 }

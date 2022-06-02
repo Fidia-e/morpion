@@ -2,10 +2,10 @@ import Board from "../Board";
 
 const Game = ({ user }) => {
   return (
-    <div className="game">
-      <div>Hello {user}</div>
-      <div className="game-board">{<Board />}</div>
-      <div className="game-info">
+    <div className="gameCtn">
+      <h1 className="gameCtn__title">Hello {user}</h1>
+      <div className="gameCtn__board">{<Board />}</div>
+      <div className="gameCtn__info">
         <div>{/* status */}</div>
         <ol>{/* TODO */}</ol>
       </div>

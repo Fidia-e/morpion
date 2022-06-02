@@ -6,7 +6,7 @@ const Welcome = ({ user, handleChange }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/game");
+    navigate("/jeu");
 
     console.log("Arrête de regarder dans les placards des gens", user, "!");
   };

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Square from "../Square";
+import "../../styles/index.scss";
 
 const Board = ({ calculateWinner }) => {
   const [squares, setSquares] = useState(Array(9).fill(null));

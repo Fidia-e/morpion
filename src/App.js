@@ -3,6 +3,7 @@ import { useState } from "react";
 import Welcome from "./pages/welcome";
 import Morpion from "./pages/morpion";
 import "../src/index.scss";
+import "./styles/index.scss";
 
 function App() {
   const [user, setUser] = useState("");
@@ -18,7 +19,7 @@ function App() {
           path="/"
           element={<Welcome user={user} handleChange={handleChange} />}
         />
-        <Route path="/game" element={<Morpion user={user} />} />
+        <Route path="/jeu" element={<Morpion user={user} />} />
         <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Routes>
     </div>
