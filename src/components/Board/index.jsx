@@ -2,7 +2,7 @@ import { useState } from "react";
 import Square from "../Square";
 import "../../styles/index.scss";
 
-const Board = ({ calculateWinner }) => {
+const Board = ({ user }) => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
 
@@ -17,6 +17,7 @@ const Board = ({ calculateWinner }) => {
       [0, 4, 8],
       [2, 4, 6],
     ];
+
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (
@@ -27,18 +28,21 @@ const Board = ({ calculateWinner }) => {
         return squares[a];
       }
     }
+
     return null;
   }
 
   const winner = calculateWinner(squares);
   let status;
+
   if (winner) {
     status = winner + " a gagné";
     const timer = setTimeout(() => {
       setSquares(Array(9).fill(null));
       return () => clearTimeout(timer);
-    }, 1000);
+    }, 1500);
   } else {
+    // status = "Prochain joueur : " + (xIsNext ? { user: user } : "test");
     status = "Prochain joueur : " + (xIsNext ? "X" : "O");
   }
 
