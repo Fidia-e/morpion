@@ -1,8 +1,8 @@
 import Game from "../../components/Game";
 import "../../styles/index.scss";
 
-const Morpion = () => {
-  return <Game />;
+const Morpion = ({ user }) => {
+  return <Game user={user} />;
 };
 
 export default Morpion;

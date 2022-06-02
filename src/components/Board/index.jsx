@@ -36,14 +36,12 @@ const Board = ({ calculateWinner }) => {
     const timer = setTimeout(() => {
       setSquares(Array(9).fill(null));
       return () => clearTimeout(timer);
-    }, 2000);
+    }, 1000);
   } else {
     status = "Prochain joueur : " + (xIsNext ? "X" : "O");
   }
 
   function handleClick(i) {
-    // on fait une copie du tableau squares pour des raisons d'immutabilité
-    // revient à écrire: const squaresCopy = squares.slice();
     const squaresCopy = [...squares];
     if (calculateWinner(squares) || squares[i]) {
       return;

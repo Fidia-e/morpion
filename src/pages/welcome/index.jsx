@@ -1,14 +1,8 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/index.scss";
 
-const Welcome = () => {
-  const [user, setUser] = useState("");
+const Welcome = ({ user, handleChange }) => {
   const navigate = useNavigate();
-
-  const handleChange = (event) => {
-    setUser(event.target.value);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
