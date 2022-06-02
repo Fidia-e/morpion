@@ -33,6 +33,10 @@ const Board = ({ calculateWinner }) => {
   let status;
   if (winner) {
     status = winner + " a gagné";
+    const timer = setTimeout(() => {
+      setSquares(Array(9).fill(null));
+      return () => clearTimeout(timer);
+    }, 2000);
   } else {
     status = "Prochain joueur : " + (xIsNext ? "X" : "O");
   }
@@ -55,7 +59,7 @@ const Board = ({ calculateWinner }) => {
 
   return (
     <>
-      <div>
+      <div className="board">
         <div className="status">{status}</div>
         <div className="board-row">
           {renderSquare(0)}
