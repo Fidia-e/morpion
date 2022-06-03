@@ -9,10 +9,9 @@ const Welcome = ({ user, handleChange }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("Arrête de regarder dans les placards des gens", user, "!");
-
     if (user.trim().length !== 0) {
       navigate("/jeu");
+      console.log("Arrête de regarder dans les placards des gens", user, "!");
     } else {
       setError(true);
     }
