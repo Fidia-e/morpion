@@ -10,12 +10,18 @@ const Welcome = ({ user, handleChange }) => {
     event.preventDefault();
 
     if (user.trim().length !== 0) {
-      navigate("/jeu");
+      const timer = setTimeout(() => {
+        navigate("/jeu");
+        // alert("C'est parti ! 🚗");
+        return () => clearTimeout(timer);
+      }, 1500);
       console.log("Arrête de regarder dans les placards des gens", user, "!");
     } else {
       setError(true);
     }
   };
+
+  // <p>C'est parti ! 🚗</p>
 
   return (
     <div className="welcomeCtn">

@@ -58,10 +58,10 @@ const Game = ({ user }) => {
     }, 1500);
   } else if (draw) {
     status = "Match nul";
+
     const timer = setTimeout(() => {
       setSquares(Array(9).fill(null));
       setStepNumber(0);
-
       return () => clearTimeout(timer);
     }, 1500);
   } else {
