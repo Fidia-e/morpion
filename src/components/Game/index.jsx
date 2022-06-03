@@ -4,6 +4,7 @@ import Board from "../Board";
 const Game = ({ user }) => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  // const [winner, setWinner] = useState(null);
 
   const lines = [
     [0, 1, 2],
@@ -47,12 +48,16 @@ const Game = ({ user }) => {
   // const current = history[stepNumber];
   const winner = calculateWinner(squares);
 
+  console.log("winner:", winner);
+
   let status;
 
   if (winner) {
     status = winner + " a gagné";
+
     const timer = setTimeout(() => {
       setSquares(Array(9).fill(null));
+      setStepNumber(0);
       return () => clearTimeout(timer);
     }, 1500);
     // } else if (matchNull) {
@@ -81,8 +86,6 @@ const Game = ({ user }) => {
     setXIsNext(!xIsNext);
     setStepNumber(historyCopy.length);
   }
-
-  console.log("history:", history.length - 1);
 
   return (
     <div className="gameCtn">
