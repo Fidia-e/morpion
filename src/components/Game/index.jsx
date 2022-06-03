@@ -31,24 +31,19 @@ const Game = ({ user }) => {
     return null;
   }
 
-  // function calculateDraw(squares) {
-  //   for (let i = 0; i < lines.length; i++) {
-  //     const [a, b, c] = lines[i];
+  function calculateDraw(squares) {
+    for (let i = 0; i < squares.length; i++) {
+      if (squares[i] === null) {
+        return false;
+      }
+    }
+    return true;
+  }
 
-  //     if (
-  //       squares[a] &&
-  //       squares[a] === squares[b] &&
-  //       squares[a] !== squares[c]
-  //       // squares[i] !== null
-  //     )
-  //       return "draw";
-  //   }
-  // }
-
-  // const current = history[stepNumber];
   const winner = calculateWinner(squares);
+  const draw = calculateDraw(squares);
 
-  console.log("winner:", winner);
+  // console.log("winner:", winner);
 
   let status;
 
@@ -60,12 +55,14 @@ const Game = ({ user }) => {
       setStepNumber(0);
       return () => clearTimeout(timer);
     }, 1500);
-    // } else if (matchNull) {
-    //   status = "Match nul";
-    //   const timer = setTimeout(() => {
-    //     setSquares(Array(9).fill(null));
-    //     return () => clearTimeout(timer);
-    //   }, 1500);
+  } else if (draw) {
+    status = "Match nul";
+    const timer = setTimeout(() => {
+      setSquares(Array(9).fill(null));
+      setStepNumber(0);
+
+      return () => clearTimeout(timer);
+    }, 1500);
   } else {
     // status = "Prochain joueur : " + (xIsNext ? { user: user } : "test");
     status = "Prochain joueur : " + (xIsNext ? "X" : "O");
