@@ -1,14 +1,21 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/index.scss";
 
 const Welcome = ({ user, handleChange }) => {
   const navigate = useNavigate();
+  const [error, setError] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/jeu");
 
     console.log("Arrête de regarder dans les placards des gens", user, "!");
+
+    if (user.trim().length !== 0) {
+      navigate("/jeu");
+    } else {
+      setError(true);
+    }
   };
 
   return (
@@ -17,7 +24,7 @@ const Welcome = ({ user, handleChange }) => {
       <form className="welcomeCtn__form" action="submit">
         <input
           className="welcomeCtn__form--input"
-          type="pseudo"
+          type="text"
           placeholder="pseudo"
           value={user}
           onChange={handleChange}
@@ -30,6 +37,9 @@ const Welcome = ({ user, handleChange }) => {
           Jouer
         </button>
       </form>
+      <div className="welcomeCtn__error">
+        {error && <p>Tu as oublié ton pseudo 😢</p>}
+      </div>
     </div>
   );
 };

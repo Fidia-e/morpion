@@ -36,6 +36,7 @@ const Game = ({ user }) => {
       if (squares[i] === null) {
         return false;
       }
+      // console.log(squares[i]);
     }
     return true;
   }
@@ -86,7 +87,7 @@ const Game = ({ user }) => {
 
   return (
     <div className="gameCtn">
-      <h1 className="gameCtn__title">Hello {user}</h1>
+      {user && <h1 className="gameCtn__title">Hello {user}</h1>}
       <div className="gameCtn__board">
         {
           <Board
