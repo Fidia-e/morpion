@@ -1,18 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader";
 import "../../styles/index.scss";
 
 const Welcome = ({ user, handleChange }) => {
   const navigate = useNavigate();
   const [error, setError] = useState(false);
+  const [loader, setLoader] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoader(false);
+    }, 1500);
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (user.trim().length !== 0) {
       const timer = setTimeout(() => {
+        setLoader(true);
         navigate("/jeu");
-        // alert("C'est parti ! 🚗");
         return () => clearTimeout(timer);
       }, 1500);
       console.log("Arrête de regarder dans les placards des gens", user, "!");
@@ -20,8 +28,6 @@ const Welcome = ({ user, handleChange }) => {
       setError(true);
     }
   };
-
-  // <p>C'est parti ! 🚗</p>
 
   return (
     <div className="welcomeCtn">
@@ -44,6 +50,7 @@ const Welcome = ({ user, handleChange }) => {
       </form>
       <div className="welcomeCtn__error">
         {error && <p>Tu as oublié ton pseudo 😢</p>}
+        {loader && <Loader />}
       </div>
     </div>
   );
