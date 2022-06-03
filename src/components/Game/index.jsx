@@ -17,6 +17,7 @@ const Game = ({ user }) => {
   ];
 
   const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [stepNumber, setStepNumber] = useState(0);
 
   function calculateWinner(squares) {
     for (let i = 0; i < lines.length; i++) {
@@ -43,7 +44,9 @@ const Game = ({ user }) => {
   //   }
   // }
 
+  // const current = history[stepNumber];
   const winner = calculateWinner(squares);
+
   let status;
 
   if (winner) {
@@ -64,16 +67,22 @@ const Game = ({ user }) => {
   }
 
   function handleClick(i) {
-    // const history = history;
-    // const current = history[history.length - 1];
+    // const current = history.length - 1;
+    const historyCopy = history.slice(0, stepNumber + 1);
     const squaresCopy = [...squares];
+
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
+
     squaresCopy[i] = xIsNext ? "X" : "O";
     setSquares(squaresCopy);
+    setHistory(history.concat([squaresCopy]));
     setXIsNext(!xIsNext);
+    setStepNumber(historyCopy.length);
   }
+
+  console.log("history:", history.length - 1);
 
   return (
     <div className="gameCtn">
@@ -88,6 +97,7 @@ const Game = ({ user }) => {
           />
         }
       </div>
+      <p className="gameCtn__stepsCount">Nombre de coups {stepNumber}</p>
       <div className="gameCtn__info">
         <div>{/* status */}</div>
         <ol>{/* TODO */}</ol>

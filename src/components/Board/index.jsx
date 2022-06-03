@@ -4,7 +4,7 @@ import "../../styles/index.scss";
 
 const Board = ({ squares, status, handleClick }) => {
   function renderSquare(i) {
-    return <Square value={squares[i]} onClick={(i) => handleClick(i)} />;
+    return <Square value={squares[i]} onClick={() => handleClick(i)} />;
   }
 
   return (
