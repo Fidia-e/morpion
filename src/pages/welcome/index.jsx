@@ -9,15 +9,14 @@ const Welcome = ({ user, handleChange }) => {
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoader(false);
-    }, 1500);
+    setLoader(false);
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (user.trim().length !== 0) {
+      setError(false);
       setLoader(true);
       const timer = setTimeout(() => {
         navigate("/jeu");
