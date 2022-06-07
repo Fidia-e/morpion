@@ -18,12 +18,14 @@ const Welcome = ({ user, handleChange }) => {
     event.preventDefault();
 
     if (user.trim().length !== 0) {
+      setLoader(true);
       const timer = setTimeout(() => {
-        setLoader(true);
         navigate("/jeu");
         return () => clearTimeout(timer);
       }, 1500);
       console.log("Arrête de regarder dans les placards des gens", user, "!");
+    } else if (user.trim().length > 0) {
+      setError(false);
     } else {
       setError(true);
     }
@@ -37,6 +39,7 @@ const Welcome = ({ user, handleChange }) => {
           className="welcomeCtn__form--input"
           type="text"
           placeholder="pseudo"
+          minlength="3"
           value={user}
           onChange={handleChange}
         />
