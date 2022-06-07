@@ -21,7 +21,7 @@ const Welcome = ({ user, handleChange }) => {
       const timer = setTimeout(() => {
         navigate("/jeu");
         return () => clearTimeout(timer);
-      }, 1500);
+      }, 1000);
       console.log("Arrête de regarder dans les placards des gens", user, "!");
     } else if (user.trim().length > 0) {
       setError(false);
