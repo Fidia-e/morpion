@@ -32,8 +32,6 @@ const Welcome = ({ user, handleChange }) => {
     localStorage.setItem("pseudo", user);
   };
 
-  const pseudo = localStorage.getItem("pseudo");
-
   return (
     <div className="welcomeCtn">
       <h1 className="welcomeCtn__title">Une envie de jouer au morpion ? 🤓</h1>
@@ -43,7 +41,7 @@ const Welcome = ({ user, handleChange }) => {
           type="text"
           placeholder="pseudo"
           minLength="3"
-          value={pseudo}
+          value={user}
           onChange={handleChange}
         />
         <button

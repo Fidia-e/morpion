@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import Board from "../Board";
 import "../../styles/index.scss";
 
-const Game = ({ pseudo, setUser }) => {
+const Game = ({ pseudo }) => {
   const [squares, setSquares] = useState(Array(9).fill(null));
-  const [xIsNext, setXIsNext] = useState(true);
+  const [xIsNext, setXIsNext] = useState();
+  const [newGame, setNewGame] = useState(true);
+
   const navigate = useNavigate();
 
   const lines = [
@@ -19,8 +21,22 @@ const Game = ({ pseudo, setUser }) => {
     [2, 4, 6],
   ];
 
-  const [history, setHistory] = useState([Array(9).fill(null)]);
-  const [stepNumber, setStepNumber] = useState(0);
+  function randomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  // const players = ["X", "O"];
+
+  // const players = {
+  //   name: { pseudo },
+  //   token: ["X", "O"],
+  // };
+
+  // console.log(players.name.pseudo);
+
+  // const nextPlayerRandom = (Math.random() * players.length * randomInt(2)) | 0;
+  const nextSquareRandom = randomInt(9);
+  console.log("nextSquareRandom:", nextSquareRandom);
 
   function calculateWinner(squares) {
     for (let i = 0; i < lines.length; i++) {
@@ -28,6 +44,7 @@ const Game = ({ pseudo, setUser }) => {
 
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c])
         return squares[a];
+      // return players.name.pseudo;
     }
 
     return null;
@@ -42,31 +59,8 @@ const Game = ({ pseudo, setUser }) => {
     return true;
   }
 
-  const winner = calculateWinner(squares);
-  const draw = calculateDraw(squares);
-
-  let status;
-
-  if (winner) {
-    status = winner + " a gagné ! 🎉";
-
-    const timer = setTimeout(() => {
-      setSquares(Array(9).fill(null));
-      setStepNumber(0);
-      return () => clearTimeout(timer);
-    }, 1500);
-  } else if (draw) {
-    status = "Match nul";
-
-    const timer = setTimeout(() => {
-      setSquares(Array(9).fill(null));
-      setStepNumber(0);
-      return () => clearTimeout(timer);
-    }, 1500);
-  } else {
-    // status = "Prochain joueur : " + (xIsNext ? { user: user } : "test");
-    status = "Prochain joueur : " + (xIsNext ? "X" : "O");
-  }
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [stepNumber, setStepNumber] = useState(0);
 
   function handleClick(i) {
     const historyCopy = history.slice(0, stepNumber + 1);
@@ -83,9 +77,49 @@ const Game = ({ pseudo, setUser }) => {
     setStepNumber(historyCopy.length);
   }
 
+  const winner = calculateWinner(squares);
+  // const winner = players.name.pseudo;
+  const draw = calculateDraw(squares);
+
+  let status;
+
+  if (winner || draw) {
+    if (winner) {
+      status = winner + " a gagné ! 🎉";
+    }
+    if (draw) {
+      status = "Match nul 🤝";
+    }
+
+    const timer = setTimeout(() => {
+      setSquares(Array(9).fill(null));
+      setStepNumber(0);
+      setNewGame(true);
+      return () => clearTimeout(timer);
+    }, 1000);
+  } else {
+    if (newGame) {
+      const nextPlayerRandom = randomInt(2);
+
+      if (nextPlayerRandom === 0) {
+        setXIsNext(false);
+      } else {
+        setXIsNext(true);
+      }
+
+      setNewGame(false);
+    }
+    status = "Prochain joueur : " + (xIsNext ? "X" : "O");
+
+    // status = "Prochain joueur : " + (xIsNext ? { players.name.pseudo } : "test");
+    // status = "Prochain joueur : " + nextPlayerRandom;
+  }
+
+  console.log(history);
+
   function handleSubmit(e) {
     e.preventDefault();
-    localStorage.clear();
+    localStorage.setItem("pseudo", " ");
     navigate("/");
   }
 
@@ -103,10 +137,6 @@ const Game = ({ pseudo, setUser }) => {
       >
         Je veux sortir de là 👀 !!
       </button>
-      <div className="gameCtn__info">
-        <div>{/* status */}</div>
-        <ol>{/* TODO */}</ol>
-      </div>
     </div>
   );
 };
