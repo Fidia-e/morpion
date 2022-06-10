@@ -19,9 +19,15 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<Welcome user={user} handleChange={handleChange} />}
+          element={
+            <Welcome
+              user={user}
+              setUser={setUser}
+              handleChange={handleChange}
+            />
+          }
         />
-        <Route path="/jeu" element={<Morpion pseudo={pseudo} />} />
+        <Route path="/jeu" element={<Morpion user={user} pseudo={pseudo} />} />
         <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Routes>
     </div>

@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Board from "../Board";
+import "../../styles/index.scss";
 
-const Game = ({ pseudo }) => {
+const Game = ({ pseudo, setUser }) => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  const navigate = useNavigate();
 
   const lines = [
     [0, 1, 2],
@@ -45,7 +48,7 @@ const Game = ({ pseudo }) => {
   let status;
 
   if (winner) {
-    status = winner + " a gagné";
+    status = winner + " a gagné ! 🎉";
 
     const timer = setTimeout(() => {
       setSquares(Array(9).fill(null));
@@ -80,13 +83,26 @@ const Game = ({ pseudo }) => {
     setStepNumber(historyCopy.length);
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    localStorage.clear();
+    navigate("/");
+  }
+
   return (
     <div className="gameCtn">
-      {pseudo && <h1 className="gameCtn__title">Hello {pseudo}</h1>}
+      {pseudo && <h1 className="gameCtn__title">Hello {pseudo} 👋</h1>}
       <div className="gameCtn__board">
         {<Board status={status} handleClick={handleClick} squares={squares} />}
       </div>
       <p className="gameCtn__stepsCount">Nombre de coups {stepNumber}</p>
+      <button
+        className="gameCtn__logoutBtn"
+        type="submit"
+        onClick={(event) => handleSubmit(event)}
+      >
+        Je veux sortir de là 👀 !!
+      </button>
       <div className="gameCtn__info">
         <div>{/* status */}</div>
         <ol>{/* TODO */}</ol>

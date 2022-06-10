@@ -33,7 +33,6 @@ const Welcome = ({ user, handleChange }) => {
   };
 
   const pseudo = localStorage.getItem("pseudo");
-  console.log("pseudo:", pseudo);
 
   return (
     <div className="welcomeCtn">
@@ -44,7 +43,7 @@ const Welcome = ({ user, handleChange }) => {
           type="text"
           placeholder="pseudo"
           minLength="3"
-          value={user}
+          value={pseudo}
           onChange={handleChange}
         />
         <button

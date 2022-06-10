@@ -1,3 +1,76 @@
-.status {
-  font-size: 1.2rem;
+h1 {
+  font: {
+    size: 2rem;
+    weight: bold;
+  }
+}
+
+/*----------------------------------------------------------------------------------
+-------------------------------------  MOBILE --------------------------------------
+----------------------------------------------------------------------------------*/
+
+@media (min-width: 320px) {
+  .boardCtn {
+    &__status {
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    &__board-row:after {
+      clear: both;
+      content: "";
+      display: table;
+    }
+  }
+
+  .square {
+    width: 70px;
+    height: 70px;
+    background: #fff;
+    border: 1px solid #bf990e;
+    float: left;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 34px;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+    color: #132a39;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+/*----------------------------------------------------------------------------------
+-------------------------------------  TABLETTE ------------------------------------
+----------------------------------------------------------------------------------*/
+
+@media (min-width: 599px) {
+  .square {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (min-width: 899px) {
+  .square {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/*----------------------------------------------------------------------------------
+-------------------------------------  DESKTOP -------------------------------------
+----------------------------------------------------------------------------------*/
+
+@media (min-width: 1199px) {
+  .square {
+    font-size: 4rem;
+    width: 150px;
+    height: 150px;
+  }
 }
