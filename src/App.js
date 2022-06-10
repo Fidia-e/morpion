@@ -12,6 +12,8 @@ function App() {
     setUser(event.target.value);
   };
 
+  const pseudo = localStorage.getItem("pseudo");
+
   return (
     <div className="App">
       <Routes>
@@ -19,7 +21,7 @@ function App() {
           path="/"
           element={<Welcome user={user} handleChange={handleChange} />}
         />
-        <Route path="/jeu" element={<Morpion user={user} />} />
+        <Route path="/jeu" element={<Morpion pseudo={pseudo} />} />
         <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Routes>
     </div>

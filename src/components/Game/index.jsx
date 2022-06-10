@@ -1,10 +1,9 @@
 import { useState } from "react";
 import Board from "../Board";
 
-const Game = ({ user }) => {
+const Game = ({ pseudo }) => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
-  // const [winner, setWinner] = useState(null);
 
   const lines = [
     [0, 1, 2],
@@ -36,15 +35,12 @@ const Game = ({ user }) => {
       if (squares[i] === null) {
         return false;
       }
-      // console.log(squares[i]);
     }
     return true;
   }
 
   const winner = calculateWinner(squares);
   const draw = calculateDraw(squares);
-
-  // console.log("winner:", winner);
 
   let status;
 
@@ -70,7 +66,6 @@ const Game = ({ user }) => {
   }
 
   function handleClick(i) {
-    // const current = history.length - 1;
     const historyCopy = history.slice(0, stepNumber + 1);
     const squaresCopy = [...squares];
 
@@ -87,16 +82,9 @@ const Game = ({ user }) => {
 
   return (
     <div className="gameCtn">
-      {user && <h1 className="gameCtn__title">Hello {user}</h1>}
+      {pseudo && <h1 className="gameCtn__title">Hello {pseudo}</h1>}
       <div className="gameCtn__board">
-        {
-          <Board
-            user={user}
-            status={status}
-            handleClick={handleClick}
-            squares={squares}
-          />
-        }
+        {<Board status={status} handleClick={handleClick} squares={squares} />}
       </div>
       <p className="gameCtn__stepsCount">Nombre de coups {stepNumber}</p>
       <div className="gameCtn__info">

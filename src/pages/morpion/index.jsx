@@ -2,9 +2,11 @@ import { Navigate } from "react-router-dom";
 import Game from "../../components/Game";
 import "../../styles/index.scss";
 
-const Morpion = ({ user }) => {
+const Morpion = ({ pseudo }) => {
   return (
-    <>{user ? <Game user={user} /> : <Navigate to="/" replace={true} />}</>
+    <>
+      {pseudo ? <Game pseudo={pseudo} /> : <Navigate to="/" replace={true} />}
+    </>
   );
 };
 

@@ -28,7 +28,12 @@ const Welcome = ({ user, handleChange }) => {
     } else {
       setError(true);
     }
+
+    localStorage.setItem("pseudo", user);
   };
+
+  const pseudo = localStorage.getItem("pseudo");
+  console.log("pseudo:", pseudo);
 
   return (
     <div className="welcomeCtn">
@@ -38,7 +43,7 @@ const Welcome = ({ user, handleChange }) => {
           className="welcomeCtn__form--input"
           type="text"
           placeholder="pseudo"
-          minlength="3"
+          minLength="3"
           value={user}
           onChange={handleChange}
         />
