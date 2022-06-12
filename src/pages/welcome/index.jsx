@@ -1,35 +1,43 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader";
+import MathRandom from "../../utils/mathRandom";
+import nameApi from "../../utils/api.json";
 import "../../styles/index.scss";
 
 const Welcome = ({ user, handleChange }) => {
   const navigate = useNavigate();
+
   const [error, setError] = useState(false);
   const [loader, setLoader] = useState(true);
+  const [computerUser, setComputerUser] = useState("");
 
   useEffect(() => {
     setLoader(false);
+
+    const nameRandomNumber = MathRandom(29);
+    const pickRandomName = nameApi.name[nameRandomNumber];
+    setComputerUser(pickRandomName);
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (user.trim().length !== 0) {
+    if (user.trim().length > 0) {
       setError(false);
       setLoader(true);
+      localStorage.setItem("pseudo", user);
+      localStorage.setItem("pseudoOpponent", computerUser);
+
       const timer = setTimeout(() => {
         navigate("/jeu");
         return () => clearTimeout(timer);
       }, 1000);
+
       console.log("Arrête de regarder dans les placards des gens", user, "!");
-    } else if (user.trim().length > 0) {
-      setError(false);
     } else {
       setError(true);
     }
-
-    localStorage.setItem("pseudo", user);
   };
 
   return (

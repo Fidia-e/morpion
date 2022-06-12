@@ -7,12 +7,11 @@ import "./styles/index.scss";
 
 function App() {
   const [user, setUser] = useState("");
+  const [computerUser] = useState("");
 
   const handleChange = (event) => {
     setUser(event.target.value);
   };
-
-  const pseudo = localStorage.getItem("pseudo");
 
   return (
     <div className="App">
@@ -27,7 +26,10 @@ function App() {
             />
           }
         />
-        <Route path="/jeu" element={<Morpion user={user} pseudo={pseudo} />} />
+        <Route
+          path="/jeu"
+          element={<Morpion user={user} computerUser={computerUser} />}
+        />
         <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Routes>
     </div>

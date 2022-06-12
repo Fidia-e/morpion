@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Board from "../Board";
+import MathRandom from "../../utils/mathRandom";
 import "../../styles/index.scss";
 
-const Game = ({ pseudo }) => {
+const Game = () => {
+  //----------------------------------------------     Initialisation     ------------------------------------------------//
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState();
   const [newGame, setNewGame] = useState(true);
+
+  const pseudo = localStorage.getItem("pseudo");
+  const pseudoOpponent = localStorage.getItem("pseudoOpponent");
 
   const navigate = useNavigate();
 
@@ -21,30 +26,33 @@ const Game = ({ pseudo }) => {
     [2, 4, 6],
   ];
 
-  function randomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
+  // TODO trouver comment afiicher le nom du gagant
 
   // const players = ["X", "O"];
 
-  // const players = {
-  //   name: { pseudo },
-  //   token: ["X", "O"],
-  // };
+  const players = {
+    name: [{ pseudo }, { pseudoOpponent }],
+    token: ["X", "O"],
+  };
 
-  // console.log(players.name.pseudo);
+  // const player = players.map((player) => player.name);
+  // console.log("player:", player);
 
-  // const nextPlayerRandom = (Math.random() * players.length * randomInt(2)) | 0;
-  const nextSquareRandom = randomInt(9);
-  console.log("nextSquareRandom:", nextSquareRandom);
+  console.log(players);
+  console.log(players.name[0].pseudo);
+  console.log(players.name[1].pseudoOpponent);
 
+  // TODO const nextSquareRandom = randomInt(9);
+
+  //---------------------------------------------     Calcul gagnants     -----------------------------------------------//
   function calculateWinner(squares) {
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
 
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c])
-        return squares[a];
-      // return players.name.pseudo;
+        return (
+          squares[a] + players.name[0].pseudo || players.name[1].pseudoOpponent
+        );
     }
 
     return null;
@@ -59,6 +67,7 @@ const Game = ({ pseudo }) => {
     return true;
   }
 
+  //-----------------------------------------------------------------------------------------------------------------------//
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [stepNumber, setStepNumber] = useState(0);
 
@@ -78,7 +87,6 @@ const Game = ({ pseudo }) => {
   }
 
   const winner = calculateWinner(squares);
-  // const winner = players.name.pseudo;
   const draw = calculateDraw(squares);
 
   let status;
@@ -99,7 +107,7 @@ const Game = ({ pseudo }) => {
     }, 1000);
   } else {
     if (newGame) {
-      const nextPlayerRandom = randomInt(2);
+      const nextPlayerRandom = MathRandom(2);
 
       if (nextPlayerRandom === 0) {
         setXIsNext(false);
@@ -109,23 +117,28 @@ const Game = ({ pseudo }) => {
 
       setNewGame(false);
     }
-    status = "Prochain joueur : " + (xIsNext ? "X" : "O");
-
-    // status = "Prochain joueur : " + (xIsNext ? { players.name.pseudo } : "test");
-    // status = "Prochain joueur : " + nextPlayerRandom;
+    status =
+      "Prochain joueur : " + (xIsNext ? `${pseudo}` : `${pseudoOpponent}`);
   }
-
-  console.log(history);
 
   function handleSubmit(e) {
     e.preventDefault();
-    localStorage.setItem("pseudo", " ");
+    localStorage.clear();
     navigate("/");
   }
 
   return (
     <div className="gameCtn">
-      {pseudo && <h1 className="gameCtn__title">Hello {pseudo} 👋</h1>}
+      <div className="gameCtn__title">
+        {pseudo && (
+          <h1 className="gameCtn__title--pseudo">Hello {pseudo} 👋</h1>
+        )}
+        {pseudoOpponent && (
+          <h2 className="gameCtn__title--pseudoOpponent">
+            Tu joues contre {pseudoOpponent}
+          </h2>
+        )}
+      </div>
       <div className="gameCtn__board">
         {<Board status={status} handleClick={handleClick} squares={squares} />}
       </div>

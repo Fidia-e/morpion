@@ -32,6 +32,10 @@
 
   &__title {
     text-align: center;
+    font: {
+      size: 2rem;
+      weight: bold;
+    }
   }
 
   &__form {

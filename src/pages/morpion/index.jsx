@@ -6,13 +6,7 @@ const Morpion = ({ user }) => {
   const pseudo = localStorage.getItem("pseudo");
 
   return (
-    <>
-      {pseudo ? (
-        <Game user={user} pseudo={pseudo} />
-      ) : (
-        <Navigate to="/" replace={true} />
-      )}
-    </>
+    <>{pseudo ? <Game user={user} /> : <Navigate to="/" replace={true} />}</>
   );
 };
 
