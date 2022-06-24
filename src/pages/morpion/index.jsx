@@ -2,12 +2,10 @@ import { Navigate } from "react-router-dom";
 import Game from "../../components/Game";
 import "../../styles/index.scss";
 
-const Morpion = ({ user }) => {
+const Morpion = ({ newGame, setNewGame }) => {
   const pseudo = localStorage.getItem("pseudo");
 
-  return (
-    <>{pseudo ? <Game user={user} /> : <Navigate to="/" replace={true} />}</>
-  );
+  return <>{pseudo ? <Game /> : <Navigate to="/" replace={true} />}</>;
 };
 
 export default Morpion;

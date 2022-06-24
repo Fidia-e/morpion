@@ -1,15 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Board from "../Board";
 import MathRandom from "../../utils/mathRandom";
 import "../../styles/index.scss";
 
-const Game = () => {
+const Game = ({ newGame, setNewGame }) => {
   //----------------------------------------------     Initialisation     ------------------------------------------------//
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
-  const [newGame, setNewGame] = useState(true);
-  const [currentOpponent, setCurrentOpponent] = useState([]);
+  // const [currentOpponent, setCurrentOpponent] = useState([]);
 
   const nextPlayerRandom = MathRandom(2);
 
@@ -31,10 +30,24 @@ const Game = () => {
 
   // TODO trouver comment afficher le BON nom du gagant
 
+  // const players = {
+  //   name: [`${pseudo}`, `${pseudoOpponent}`],
+  //   token: ["X", "O"],
+  // };
+
   const players = {
-    name: [`${pseudo}`, `${pseudoOpponent}`],
-    token: ["X", "O"],
+    user: {
+      name: `${pseudo}`,
+      token: "X",
+    },
+    computer: {
+      name: `${pseudoOpponent}`,
+      token: "O",
+    },
   };
+
+  console.log(players.user);
+  console.log(players.computer);
 
   // console.log(players.name);
   // console.log(players.token);
@@ -43,20 +56,31 @@ const Game = () => {
 
   // TODO const nextSquareRandom = randomInt(9);
 
-  useEffect(() => {
-    const token = players.token;
-    setCurrentOpponent([pseudoOpponent, token[nextPlayerRandom]]);
-    // localStorage.setItem("pseudoOpponent", currentOpponent[0]);
-    console.log("currentOpponent:", currentOpponent);
-  }, []);
+  // useEffect(() => {
+  //   const token = players.token;
+  //   setCurrentOpponent([pseudoOpponent, token[nextPlayerRandom]]);
+  //   localStorage.setItem("pseudoOpponent", currentOpponent[0]);
+  //   console.log("currentOpponent:", currentOpponent);
+  // }, []);
 
   //---------------------------------------------     Calcul gagnants     -----------------------------------------------//
   function calculateWinner(squares) {
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
 
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c])
-        return `${pseudo}` || `${pseudoOpponent}`;
+      if (
+        squares[a] &&
+        squares[a] === squares[b] &&
+        squares[a] === squares[c]
+      ) {
+        return squares[a];
+
+        // if(squares[a] === "X") {
+        //   return `${pseudo}`;
+        // } else return `${pseudoOpponent}`;
+      }
+
+      // squares[a] === "X" ? `${pseudo}` : `${pseudoOpponent}`;
     }
 
     return null;
@@ -74,10 +98,10 @@ const Game = () => {
   //-----------------------------------------------------------------------------------------------------------------------//
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [stepNumber, setStepNumber] = useState(0);
+  const squaresCopy = [...squares];
 
   function handleClick(i) {
     const historyCopy = history.slice(0, stepNumber + 1);
-    const squaresCopy = [...squares];
 
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -89,6 +113,27 @@ const Game = () => {
     setXIsNext(!xIsNext);
     setStepNumber(historyCopy.length);
   }
+
+  if (xIsNext === false) {
+    const timer = setTimeout(() => {
+      const emptySquares = squaresCopy.filter((square) => square === null);
+      const randomEmptySquare = MathRandom(emptySquares.length);
+
+      if (emptySquares) {
+        // squaresCopy.splice(randomEmptySquare, 1, "O");
+        squaresCopy.splice(randomEmptySquare, 1, "O");
+      }
+
+      console.log("emptySquares:", emptySquares);
+      console.log("JEU------->:", squaresCopy);
+
+      return () => clearTimeout(timer);
+    }, 1500);
+
+    // setSquares(squaresCopy);
+  }
+
+  // console.log(squaresCopy);
 
   const winner = calculateWinner(squares);
   const draw = calculateDraw(squares);
