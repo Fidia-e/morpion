@@ -3,6 +3,57 @@
 ----------------------------------------------------------------------------------*/
 
 @media (min-width: 320px) {
+  .welcomeCtn {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    &__title {
+      text-align: center;
+      margin-top: 5rem;
+      font: {
+        size: 1.8rem;
+        weight: bold;
+      }
+    }
+
+    &__form {
+      width: 70%;
+      height: 50%;
+      margin: auto;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-around;
+
+      &--btn {
+        width: 200px;
+        height: 120px;
+        background-color: #23475f;
+        color: #fff;
+        border-radius: 5px;
+        font-size: 1.3rem;
+        transition: all ease-in-out 0.3s;
+
+        &--span {
+          display: block;
+          width: 50%;
+          font-size: 3.5rem;
+          margin: 0.5rem auto 0 auto;
+          transition: transform ease-in-out 0.3s;
+        }
+
+        &:hover {
+          box-shadow: #23475f70 0px 7px 29px 0px;
+
+          :nth-child(n) {
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
 }
 
 /*----------------------------------------------------------------------------------
@@ -10,9 +61,41 @@
 ----------------------------------------------------------------------------------*/
 
 @media (min-width: 599px) {
+  .welcomeCtn {
+    &__title {
+      margin-top: 15rem;
+      font-size: 2rem;
+    }
+
+    &__form {
+      &--btn {
+        width: 220px;
+        height: 120px;
+        font-size: 1.5rem;
+      }
+    }
+  }
 }
 
 @media (min-width: 899px) {
+  .welcomeCtn {
+    &__title {
+      margin-top: 25rem;
+      font-size: 2rem;
+    }
+
+    &__form {
+      &--btn {
+        width: 250px;
+        height: 150px;
+        font-size: 1.6rem;
+
+        &--span {
+          font-size: 4rem;
+        }
+      }
+    }
+  }
 }
 
 /*----------------------------------------------------------------------------------
@@ -20,52 +103,19 @@
 ----------------------------------------------------------------------------------*/
 
 @media (min-width: 1199px) {
-}
-
-.welcomeCtn {
-  width: 100%;
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  &__title {
-    text-align: center;
-    font: {
-      size: 2rem;
-      weight: bold;
+  .welcomeCtn {
+    &__title {
+      margin-top: 20rem;
+      font-size: 2.2rem;
     }
-  }
 
-  &__form {
-    width: 30%;
-    margin: 4rem auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    &__form {
+      width: 30%;
+      margin: 5rem auto;
 
-    &--btn {
-      width: 250px;
-      height: 150px;
-      background-color: #23475f;
-      color: #fff;
-      border-radius: 5px;
-      font-size: 1.6rem;
-
-      &--span {
-        display: block;
-        width: 50%;
-        font-size: 5rem;
-        margin: 0.5rem auto 0 auto;
-        transition: transform ease-in-out 0.3s;
-      }
-
-      &:hover {
-        box-shadow: #23475f70 0px 7px 29px 0px;
-
-        :nth-child(n) {
-          transform: scale(1.1);
+      &--btn {
+        &--span {
+          font-size: 5rem;
         }
       }
     }
