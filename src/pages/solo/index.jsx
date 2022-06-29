@@ -35,7 +35,7 @@ const Solo = () => {
       localStorage.setItem("pseudoOpponent", computerUser);
 
       const timer = setTimeout(() => {
-        navigate("/jeu");
+        navigate("/jeu-solo");
         return () => clearTimeout(timer);
       }, 1000);
 
@@ -46,11 +46,11 @@ const Solo = () => {
   };
 
   return (
-    <div className="welcomeCtn">
-      <h1 className="welcomeCtn__title">Tu affronteras l'ordinateur 🧑‍💻</h1>
-      <form className="welcomeCtn__form" action="submit">
+    <div className="welcomeSoloCtn">
+      <h1 className="welcomeSoloCtn__title">Tu affronteras l'ordinateur 🧑‍💻</h1>
+      <form className="welcomeSoloCtn__form" action="submit">
         <input
-          className="welcomeCtn__form--input"
+          className="welcomeSoloCtn__form--input"
           type="text"
           placeholder="pseudo"
           minLength="3"
@@ -58,14 +58,14 @@ const Solo = () => {
           onChange={handleChange}
         />
         <button
-          className="welcomeCtn__form--btn"
+          className="welcomeSoloCtn__form--btn"
           type="submit"
           onClick={(event) => handleSubmit(event)}
         >
           Jouer
         </button>
       </form>
-      <div className="welcomeCtn__error">
+      <div className="welcomeSoloCtn__error">
         {error && <p>Tu as oublié ton pseudo 😢</p>}
         {loader && <Loader />}
       </div>

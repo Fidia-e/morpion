@@ -144,23 +144,23 @@ const GameSolo = () => {
   }
 
   return (
-    <div className="gameCtn">
-      <div className="gameCtn__title">
+    <div className="gameSoloCtn">
+      <div className="gameSoloCtn__title">
         {pseudo && (
-          <h1 className="gameCtn__title--pseudo">Hello {pseudo} 👋</h1>
+          <h1 className="gameSoloCtn__title--pseudo">Hello {pseudo} 👋</h1>
         )}
         {pseudoOpponent && (
-          <h2 className="gameCtn__title--pseudoOpponent">
+          <h2 className="gameSoloCtn__title--pseudoOpponent">
             Tu joues contre {pseudoOpponent}
           </h2>
         )}
       </div>
-      <div className="gameCtn__board">
+      <div className="gameSoloCtn__board">
         {<Board status={status} handleClick={handleClick} squares={squares} />}
       </div>
-      <p className="gameCtn__stepsCount">Nombre de coups {stepNumber}</p>
+      <p className="gameSoloCtn__stepsCount">Nombre de coups {stepNumber}</p>
       <button
-        className="gameCtn__logoutBtn"
+        className="gameSoloCtn__logoutBtn"
         type="submit"
         onClick={(event) => handleSubmit(event)}
       >

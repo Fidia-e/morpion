@@ -31,11 +31,11 @@ const Duo = () => {
     } else {
       setError(false);
       setLoader(true);
-      localStorage.setItem("player 1", users.player1);
-      localStorage.setItem("player 1", users.player2);
+      localStorage.setItem("joueur1", users.player1);
+      localStorage.setItem("joueur2", users.player2);
 
       const timer = setTimeout(() => {
-        navigate("/jeu");
+        navigate("/jeu-duo");
         return () => clearTimeout(timer);
       }, 1000);
 
@@ -46,14 +46,14 @@ const Duo = () => {
   };
 
   return (
-    <div className="welcomeCtn">
-      <h1 className="welcomeCtn__title">
+    <div className="welcomeDuoCtn">
+      <h1 className="welcomeDuoCtn__title">
         Vous jouerez l'un(e) contre l'autre 🙋💁
       </h1>
-      <form className="welcomeCtn__form" action="submit">
+      <form className="welcomeDuoCtn__form" action="submit">
         <input
-          className="welcomeCtn__form--input"
-          name="joueur1"
+          className="welcomeDuoCtn__form--input"
+          name="player1"
           type="text"
           placeholder="pseudo joueur 1"
           minLength="3"
@@ -61,8 +61,8 @@ const Duo = () => {
           onChange={handleChange}
         />
         <input
-          className="welcomeCtn__form--input"
-          name="joueur2"
+          className="welcomeDuoCtn__form--input"
+          name="player2"
           type="text"
           placeholder="pseudo joueur 2"
           minLength="3"
@@ -70,7 +70,7 @@ const Duo = () => {
           onChange={handleChange}
         />
         <button
-          className="welcomeCtn__form--btn"
+          className="welcomeDuoCtn__form--btn"
           type="submit"
           onClick={(event) => handleSubmit(event)}
         >
