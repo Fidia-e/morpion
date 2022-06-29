@@ -126,8 +126,8 @@ const GameDuo = () => {
             Hello {joueur1} et {joueur2} 👋
           </h1>
         )}
-        <h2 className="gameDuoCtn__title--pseudoOpponent">
-          Vous commencerez chacun votre tour aléatoirement 🎲!
+        <h2 className="gameDuoCtn__title--subtitle">
+          Vous commencerez chacun votre tour aléatoirement 🎲 !
         </h2>
       </div>
       <div className="gameDuoCtn__board">
