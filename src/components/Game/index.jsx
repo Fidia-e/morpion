@@ -9,10 +9,12 @@ const Game = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [newGame, setNewGame] = useState(true);
-  // const [currentOpponent, setCurrentOpponent] = useState([]);
 
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [stepNumber, setStepNumber] = useState(0);
+
+  const squaresCopy = [...squares];
   const nextPlayerRandom = MathRandom(2);
-  console.log("nextPlayerRandom:", nextPlayerRandom);
 
   const pseudo = localStorage.getItem("pseudo");
   const pseudoOpponent = localStorage.getItem("pseudoOpponent");
@@ -30,42 +32,9 @@ const Game = () => {
     [2, 4, 6],
   ];
 
-  // TODO afficher le nom du gagant
-
-  // const players = {
-  //   name: [`${pseudo}`, `${pseudoOpponent}`],
-  //   token: ["X", "O"],
-  // };
-
-  const players = {
-    user: {
-      name: `${pseudo}`,
-      token: "X",
-    },
-    computer: {
-      name: `${pseudoOpponent}`,
-      token: "O",
-    },
-  };
-
-  // console.log("USER:", players.user);
-  // console.log("COMPUTER:", players.computer);
-
   console.log("RENDU GAME");
 
-  // console.log(players.name);
-  // console.log(players.token);
-  // console.log(`${pseudo}`);
-  // console.log(`${pseudoOpponent}`);
-
-  // useEffect(() => {
-  //   const token = players.token;
-  //   setCurrentOpponent([pseudoOpponent, token[nextPlayerRandom]]);
-  //   localStorage.setItem("pseudoOpponent", currentOpponent[0]);
-  //   console.log("currentOpponent:", currentOpponent);
-  // }, []);
-
-  //---------------------------------------------     Calcul gagnants     -----------------------------------------------//
+  //----------------------------------------     Calcul gagnant // match nul     ------------------------------------------//
   function calculateWinner(squares) {
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
@@ -76,8 +45,8 @@ const Game = () => {
         squares[a] === squares[c]
       ) {
         if (squares[a] === "X") {
-          return `${pseudo}`;
-        } else return `${pseudoOpponent}`;
+          return pseudo;
+        } else return pseudoOpponent;
       }
     }
 
@@ -93,10 +62,7 @@ const Game = () => {
     return true;
   }
 
-  //-----------------------------------------------------------------------------------------------------------------------//
-  const [history, setHistory] = useState([Array(9).fill(null)]);
-  const [stepNumber, setStepNumber] = useState(0);
-  const squaresCopy = [...squares];
+  //---------------------------------------------------   JEU   --------------------------------------------------------//
 
   function handleClick(i) {
     const historyCopy = history.slice(0, stepNumber + 1);
@@ -116,13 +82,11 @@ const Game = () => {
     const timer = setTimeout(() => {
       const emptySquares = squaresCopy.filter((square) => square === null);
       const randomEmptySquare = MathRandom(emptySquares.length, 1);
-      console.log("randomEmptySquare:", randomEmptySquare);
       let availableSquares = 0;
 
       for (let i = 0; i < squaresCopy.length; i++) {
         if (squaresCopy[i] === null) {
           availableSquares++;
-          console.log("availableSquares:", availableSquares);
 
           if (availableSquares === randomEmptySquare) {
             squaresCopy[i] = "O";
@@ -136,7 +100,10 @@ const Game = () => {
 
       return () => clearTimeout(timer);
     }, 1500);
+  } else {
   }
+
+  //-----------------------------------------------   AFFICHAGE   ----------------------------------------------------//
 
   const winner = calculateWinner(squares);
   const draw = calculateDraw(squares);
@@ -147,7 +114,7 @@ const Game = () => {
     if (winner) {
       status = winner + " a gagné ! 🎉";
     }
-    if (draw) {
+    if (!winner && draw) {
       status = "Match nul 🤝";
     }
 
@@ -156,7 +123,7 @@ const Game = () => {
       setStepNumber(0);
       setNewGame(true);
       return () => clearTimeout(timer);
-    }, 1000);
+    }, 1500);
   } else {
     if (newGame) {
       if (nextPlayerRandom === 0) {
@@ -164,7 +131,6 @@ const Game = () => {
       } else {
         setXIsNext(true);
       }
-
       setNewGame(false);
     }
     status =
