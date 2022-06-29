@@ -127,7 +127,7 @@ const GameDuo = () => {
           </h1>
         )}
         <h2 className="gameDuoCtn__title--subtitle">
-          Vous commencerez chacun votre tour aléatoirement 🎲 !
+          Vous commencerez chacun(e) votre tour aléatoirement 🎲 !
         </h2>
       </div>
       <div className="gameDuoCtn__board">
