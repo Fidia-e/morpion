@@ -8,10 +8,11 @@ const Game = () => {
   //----------------------------------------------     Initialisation     ------------------------------------------------//
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
-  const [newGame, setNewGame] = useState(false);
+  const [newGame, setNewGame] = useState(true);
   // const [currentOpponent, setCurrentOpponent] = useState([]);
 
   const nextPlayerRandom = MathRandom(2);
+  console.log("nextPlayerRandom:", nextPlayerRandom);
 
   const pseudo = localStorage.getItem("pseudo");
   const pseudoOpponent = localStorage.getItem("pseudoOpponent");
@@ -114,12 +115,14 @@ const Game = () => {
   if (xIsNext === false) {
     const timer = setTimeout(() => {
       const emptySquares = squaresCopy.filter((square) => square === null);
-      const randomEmptySquare = MathRandom(emptySquares.length) + 1;
+      const randomEmptySquare = MathRandom(emptySquares.length, 1);
+      console.log("randomEmptySquare:", randomEmptySquare);
       let availableSquares = 0;
 
       for (let i = 0; i < squaresCopy.length; i++) {
         if (squaresCopy[i] === null) {
           availableSquares++;
+          console.log("availableSquares:", availableSquares);
 
           if (availableSquares === randomEmptySquare) {
             squaresCopy[i] = "O";
@@ -133,11 +136,7 @@ const Game = () => {
 
       return () => clearTimeout(timer);
     }, 1500);
-
-    // setSquares(squaresCopy);
   }
-
-  // console.log(squaresCopy);
 
   const winner = calculateWinner(squares);
   const draw = calculateDraw(squares);
@@ -159,7 +158,7 @@ const Game = () => {
       return () => clearTimeout(timer);
     }, 1000);
   } else {
-    if (newGame === true) {
+    if (newGame) {
       if (nextPlayerRandom === 0) {
         setXIsNext(false);
       } else {

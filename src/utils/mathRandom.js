@@ -1,9 +1,9 @@
-const MathRandom = (max) => {
-  return Math.floor(Math.random() * max);
-};
-
-// const MathRandom = (min = 0, max) => {
-//   return Math.floor(Math.random() * (max - min + 1) ) + min;
+// const MathRandom = (max) => {
+//   return Math.floor(Math.random() * max);
 // };
+
+const MathRandom = (max, min = 0) => {
+  return Math.floor(Math.random() * max) + min;
+};
 
 export default MathRandom;
