@@ -20,44 +20,33 @@ const Welcome = ({ user, handleChange }) => {
     setComputerUser(pickRandomName);
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleSubmitSolo = (event) => {
     event.preventDefault();
+    navigate("/solo");
+  };
 
-    if (user.trim().length > 0) {
-      setError(false);
-      setLoader(true);
-      localStorage.setItem("pseudo", user);
-      localStorage.setItem("pseudoOpponent", computerUser);
-
-      const timer = setTimeout(() => {
-        navigate("/jeu");
-        return () => clearTimeout(timer);
-      }, 1000);
-
-      console.log("Arrête de regarder dans les placards des gens", user, "!");
-    } else {
-      setError(true);
-    }
+  const handleSubmitDuo = (event) => {
+    event.preventDefault();
+    navigate("/duo");
   };
 
   return (
     <div className="welcomeCtn">
       <h1 className="welcomeCtn__title">Une envie de jouer au morpion ? 🤓</h1>
       <form className="welcomeCtn__form" action="submit">
-        <input
-          className="welcomeCtn__form--input"
-          type="text"
-          placeholder="pseudo"
-          minLength="3"
-          value={user}
-          onChange={handleChange}
-        />
         <button
           className="welcomeCtn__form--btn"
           type="submit"
-          onClick={(event) => handleSubmit(event)}
+          onClick={(event) => handleSubmitSolo(event)}
         >
-          Jouer
+          Jouer seul 🤳
+        </button>
+        <button
+          className="welcomeCtn__form--btn"
+          type="submit"
+          onClick={(event) => handleSubmitDuo(event)}
+        >
+          Jouer à deux 📲
         </button>
       </form>
       <div className="welcomeCtn__error">

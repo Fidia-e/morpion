@@ -2,16 +2,12 @@ import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Welcome from "./pages/welcome";
 import Morpion from "./pages/morpion";
+import Solo from "./pages/solo";
+import Duo from "./pages/duo";
 import "../src/index.scss";
 import "./styles/index.scss";
 
 function App() {
-  const [user, setUser] = useState("");
-
-  const handleChange = (event) => {
-    setUser(event.target.value);
-  };
-
   return (
     <div className="App">
       <Routes>
@@ -19,13 +15,15 @@ function App() {
           path="/"
           element={
             <Welcome
-              user={user}
-              setUser={setUser}
-              handleChange={handleChange}
+            // user={user}
+            // setUser={setUser}
+            // handleChange={handleChange}
             />
           }
         />
-        <Route path="/jeu" element={<Morpion user={user} />} />
+        <Route path="/solo" element={<Solo />} />
+        <Route path="/duo" element={<Duo />} />
+        <Route path="/jeu" element={<Morpion />} />
         <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Routes>
     </div>

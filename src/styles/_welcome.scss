@@ -39,11 +39,11 @@
   }
 
   &__form {
-    width: 100%;
-    margin: 2rem auto;
+    width: 40%;
+    margin: 4rem auto;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
 
     &--input {
       width: 250px;
@@ -60,15 +60,20 @@
 
       &:focus {
         border: solid 2px #ffc800;
+
+        &::placeholder {
+          color: transparent;
+        }
       }
     }
 
     &--btn {
-      width: 100px;
+      width: 250px;
+      height: 75px;
       background-color: #23475f;
       color: #fff;
       border-radius: 5px;
-      font-size: 1.3rem;
+      font-size: 1.5rem;
 
       &:hover {
         box-shadow: #23475f70 0px 7px 29px 0px;
