@@ -47,8 +47,10 @@ const Game = () => {
     },
   };
 
-  console.log("USER:", players.user);
-  console.log("COMPUTER:", players.computer);
+  // console.log("USER:", players.user);
+  // console.log("COMPUTER:", players.computer);
+
+  console.log("RENDU GAME");
 
   // console.log(players.name);
   // console.log(players.token);
@@ -72,14 +74,10 @@ const Game = () => {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
-        return squares[a];
-
-        // if(squares[a] === "X") {
-        //   return `${pseudo}`;
-        // } else return `${pseudoOpponent}`;
+        if (squares[a] === "X") {
+          return `${pseudo}`;
+        } else return `${pseudoOpponent}`;
       }
-
-      // squares[a] === "X" ? `${pseudo}` : `${pseudoOpponent}`;
     }
 
     return null;
@@ -116,7 +114,7 @@ const Game = () => {
   if (xIsNext === false) {
     const timer = setTimeout(() => {
       const emptySquares = squaresCopy.filter((square) => square === null);
-      const randomEmptySquare = MathRandom(emptySquares.length - 1) + 1;
+      const randomEmptySquare = MathRandom(emptySquares.length) + 1;
       let availableSquares = 0;
 
       for (let i = 0; i < squaresCopy.length; i++) {
