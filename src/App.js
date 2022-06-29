@@ -7,7 +7,6 @@ import "./styles/index.scss";
 
 function App() {
   const [user, setUser] = useState("");
-  const [newGame, setNewGame] = useState(true);
 
   const handleChange = (event) => {
     setUser(event.target.value);
@@ -26,12 +25,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="/jeu"
-          element={
-            <Morpion user={user} newGame={newGame} setNewGame={setNewGame} />
-          }
-        />
+        <Route path="/jeu" element={<Morpion user={user} />} />
         <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Routes>
     </div>

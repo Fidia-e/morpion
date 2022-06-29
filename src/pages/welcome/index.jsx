@@ -15,7 +15,7 @@ const Welcome = ({ user, handleChange }) => {
   useEffect(() => {
     setLoader(false);
 
-    const nameRandomNumber = MathRandom(29);
+    const nameRandomNumber = MathRandom(36);
     const pickRandomName = nameApi.name[nameRandomNumber];
     setComputerUser(pickRandomName);
   }, []);

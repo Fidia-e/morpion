@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Board from "../Board";
 import MathRandom from "../../utils/mathRandom";
 import "../../styles/index.scss";
 
-const Game = ({ newGame, setNewGame }) => {
+const Game = () => {
   //----------------------------------------------     Initialisation     ------------------------------------------------//
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  const [newGame, setNewGame] = useState(false);
   // const [currentOpponent, setCurrentOpponent] = useState([]);
 
   const nextPlayerRandom = MathRandom(2);
@@ -28,7 +29,7 @@ const Game = ({ newGame, setNewGame }) => {
     [2, 4, 6],
   ];
 
-  // TODO trouver comment afficher le BON nom du gagant
+  // TODO afficher le nom du gagant
 
   // const players = {
   //   name: [`${pseudo}`, `${pseudoOpponent}`],
@@ -46,15 +47,13 @@ const Game = ({ newGame, setNewGame }) => {
     },
   };
 
-  console.log(players.user);
-  console.log(players.computer);
+  console.log("USER:", players.user);
+  console.log("COMPUTER:", players.computer);
 
   // console.log(players.name);
   // console.log(players.token);
   // console.log(`${pseudo}`);
   // console.log(`${pseudoOpponent}`);
-
-  // TODO const nextSquareRandom = randomInt(9);
 
   // useEffect(() => {
   //   const token = players.token;
@@ -117,15 +116,22 @@ const Game = ({ newGame, setNewGame }) => {
   if (xIsNext === false) {
     const timer = setTimeout(() => {
       const emptySquares = squaresCopy.filter((square) => square === null);
-      const randomEmptySquare = MathRandom(emptySquares.length);
+      const randomEmptySquare = MathRandom(emptySquares.length - 1) + 1;
+      let availableSquares = 0;
 
-      if (emptySquares) {
-        // squaresCopy.splice(randomEmptySquare, 1, "O");
-        squaresCopy.splice(randomEmptySquare, 1, "O");
+      for (let i = 0; i < squaresCopy.length; i++) {
+        if (squaresCopy[i] === null) {
+          availableSquares++;
+
+          if (availableSquares === randomEmptySquare) {
+            squaresCopy[i] = "O";
+
+            setSquares(squaresCopy);
+            setXIsNext(!xIsNext);
+            break;
+          }
+        }
       }
-
-      console.log("emptySquares:", emptySquares);
-      console.log("JEU------->:", squaresCopy);
 
       return () => clearTimeout(timer);
     }, 1500);
@@ -155,7 +161,7 @@ const Game = ({ newGame, setNewGame }) => {
       return () => clearTimeout(timer);
     }, 1000);
   } else {
-    if (newGame) {
+    if (newGame === true) {
       if (nextPlayerRandom === 0) {
         setXIsNext(false);
       } else {
