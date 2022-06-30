@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Board from "../Board";
 import MathRandom from "../../utils/mathRandom";
@@ -21,6 +21,12 @@ const GameSolo = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (pseudo === null || pseudoOpponent === null) {
+      navigate("/");
+    }
+  }, []);
+
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -32,7 +38,7 @@ const GameSolo = () => {
     [2, 4, 6],
   ];
 
-  console.log("RENDU GAME");
+  // console.log("RENDU GAME");
 
   //----------------------------------------     Calcul gagnant // match nul     ------------------------------------------//
   function calculateWinner(squares) {

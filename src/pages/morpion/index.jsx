@@ -1,4 +1,3 @@
-import { Navigate } from "react-router-dom";
 import GameSolo from "../../components/Game/solo";
 import GameDuo from "../../components/Game/duo";
 import "../../styles/index.scss";
@@ -11,8 +10,8 @@ const Morpion = () => {
 
   return (
     <>
-      {pseudo ? <GameSolo /> : <Navigate to="/" replace={true} />}
-      {players ? <GameDuo /> : <Navigate to="/" replace={true} />}
+      {pseudo && <GameSolo />}
+      {players && <GameDuo />}
     </>
   );
 };
