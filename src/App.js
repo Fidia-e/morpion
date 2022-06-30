@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Welcome from "./pages/welcome";
-import Morpion from "./pages/morpion";
 import Solo from "./pages/solo";
 import Duo from "./pages/duo";
 import GameSolo from "./components/Game/solo";
