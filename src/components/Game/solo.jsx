@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Board from "../Board";
 import MathRandom from "../../utils/mathRandom";
-import calculateWinner from "../../utils/calculateWinner";
-import calculateDraw from "../../utils/calculateDraw";
 import "../../styles/index.scss";
 
 const GameSolo = () => {
@@ -29,7 +27,46 @@ const GameSolo = () => {
     }
   });
 
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
   // console.log("RENDU GAME");
+
+  //----------------------------------------     Calcul gagnant // match nul     ------------------------------------------//
+  function calculateWinner(squares) {
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+
+      if (
+        squares[a] &&
+        squares[a] === squares[b] &&
+        squares[a] === squares[c]
+      ) {
+        if (squares[a] === "X") {
+          return pseudo;
+        } else return pseudoOpponent;
+      }
+    }
+
+    return null;
+  }
+
+  function calculateDraw(squares) {
+    for (let i = 0; i < squares.length; i++) {
+      if (squares[i] === null) {
+        return false;
+      }
+    }
+    return true;
+  }
 
   //---------------------------------------------------   JEU   --------------------------------------------------------//
 
@@ -125,14 +162,7 @@ const GameSolo = () => {
         )}
       </div>
       <div className="gameSoloCtn__board">
-        {
-          <Board
-            status={status}
-            handleClick={handleClick}
-            squares={squares}
-            xIsNext={xIsNext}
-          />
-        }
+        {<Board status={status} handleClick={handleClick} squares={squares} />}
       </div>
       <p className="gameSoloCtn__stepsCount">Nombre de coups {stepNumber}</p>
       <button

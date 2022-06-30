@@ -3,11 +3,7 @@ import "../../styles/index.scss";
 const Square = ({ value, onClick, xIsNext }) => {
   return (
     <>
-      <button
-        className="square"
-        onClick={() => onClick()}
-        disabled={xIsNext === false}
-      >
+      <button className="square" onClick={() => onClick()}>
         {value}
       </button>
     </>
