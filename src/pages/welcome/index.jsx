@@ -23,7 +23,7 @@ const Welcome = ({ user, handleChange }) => {
           type="submit"
           onClick={(event) => handleSubmitSolo(event)}
         >
-          Jouer seul <span className="welcomeCtn__form--btn--span">🤳</span>
+          Jouer seul(e) <span className="welcomeCtn__form--btn--span">🤳</span>
         </button>
         <button
           className="welcomeCtn__form--btn"

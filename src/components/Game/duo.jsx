@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Board from "../Board";
 import MathRandom from "../../utils/mathRandom";
@@ -22,6 +22,12 @@ const GameDuo = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (joueur1 === null || joueur2 === null) {
+      navigate("/");
+    }
+  });
+
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -32,6 +38,8 @@ const GameDuo = () => {
     [0, 4, 8],
     [2, 4, 6],
   ];
+
+  // console.log("RENDU GAME");
 
   //----------------------------------------     Calcul gagnant // match nul     ------------------------------------------//
   function calculateWinner(squares) {
@@ -125,7 +133,7 @@ const GameDuo = () => {
           </h1>
         )}
         <h2 className="gameDuoCtn__title--subtitle">
-          Vous commencerez chacun votre tour aléatoirement 🎲 !
+          Vous commencerez chacun(e) votre tour aléatoirement 🎲 !
         </h2>
       </div>
       <div className="gameDuoCtn__board">

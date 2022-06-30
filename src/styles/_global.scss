@@ -3,17 +3,31 @@
 ----------------------------------------------------------------------------------*/
 
 @media (min-width: 320px) {
+  .loader {
+    font-size: 1.1rem;
+  }
+
   .boardCtn {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: c;
+
     &__status {
+      display: block;
       font-size: 1.2rem;
       text-align: center;
       margin-bottom: 2rem;
     }
 
-    &__board-row:after {
-      clear: both;
-      content: "";
-      display: table;
+    &__board-row {
+      margin: auto;
+
+      :after {
+        clear: both;
+        content: "";
+        display: table;
+      }
     }
   }
 
@@ -43,6 +57,10 @@
 ----------------------------------------------------------------------------------*/
 
 @media (min-width: 599px) {
+  .loader {
+    font-size: 1.5rem;
+  }
+
   .square {
     width: 120px;
     height: 120px;
@@ -50,6 +68,10 @@
 }
 
 @media (min-width: 899px) {
+  .loader {
+    font-size: 1.8rem;
+  }
+
   .boardCtn {
     &__status {
       font-size: 1.5rem;
@@ -67,6 +89,10 @@
 ----------------------------------------------------------------------------------*/
 
 @media (min-width: 1199px) {
+  .loader {
+    font-size: 2rem;
+  }
+
   .square {
     font-size: 4rem;
     width: 150px;
