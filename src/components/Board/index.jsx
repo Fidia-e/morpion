@@ -2,9 +2,15 @@
 import Square from "../Square";
 import "../../styles/index.scss";
 
-const Board = ({ squares, status, handleClick }) => {
+const Board = ({ squares, status, handleClick, xIsNext }) => {
   function renderSquare(i) {
-    return <Square value={squares[i]} onClick={() => handleClick(i)} />;
+    return (
+      <Square
+        value={squares[i]}
+        xIsNext={xIsNext}
+        onClick={() => handleClick(i)}
+      />
+    );
   }
 
   return (

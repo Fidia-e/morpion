@@ -125,7 +125,14 @@ const GameSolo = () => {
         )}
       </div>
       <div className="gameSoloCtn__board">
-        {<Board status={status} handleClick={handleClick} squares={squares} />}
+        {
+          <Board
+            status={status}
+            handleClick={handleClick}
+            squares={squares}
+            xIsNext={xIsNext}
+          />
+        }
       </div>
       <p className="gameSoloCtn__stepsCount">Nombre de coups {stepNumber}</p>
       <button

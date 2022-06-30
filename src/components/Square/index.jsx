@@ -1,9 +1,13 @@
 import "../../styles/index.scss";
 
-const Square = ({ value, onClick }) => {
+const Square = ({ value, onClick, xIsNext }) => {
   return (
     <>
-      <button className="square" onClick={() => onClick()}>
+      <button
+        className="square"
+        onClick={() => onClick()}
+        disabled={xIsNext === false}
+      >
         {value}
       </button>
     </>
