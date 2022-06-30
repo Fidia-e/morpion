@@ -1,5 +1,7 @@
+import { useState } from "react";
 import GameSolo from "../../components/Game/solo";
 import GameDuo from "../../components/Game/duo";
+import calculateWinner from "../../utils/calculateWinner";
 import "../../styles/index.scss";
 
 const Morpion = () => {
