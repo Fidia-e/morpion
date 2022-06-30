@@ -7,11 +7,12 @@ const Morpion = () => {
   const pseudo = localStorage.getItem("pseudo");
   const joueur1 = localStorage.getItem("joueur 1");
   const joueur2 = localStorage.getItem("joueur 2");
+  const players = [joueur1, joueur2];
 
   return (
     <>
       {pseudo ? <GameSolo /> : <Navigate to="/" replace={true} />}
-      {joueur1 && joueur2 ? <GameDuo /> : <Navigate to="/" replace={true} />}
+      {players ? <GameDuo /> : <Navigate to="/" replace={true} />}
     </>
   );
 };
