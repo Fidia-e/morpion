@@ -13,19 +13,9 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Welcome
-            // user={user}
-            // setUser={setUser}
-            // handleChange={handleChange}
-            />
-          }
-        />
+        <Route path="/" element={<Welcome />} />
         <Route path="/solo" element={<Solo />} />
         <Route path="/duo" element={<Duo />} />
-        <Route path="/jeu" element={<Morpion />} />
         <Route path="/jeu-solo" element={<GameSolo />} />
         <Route path="/jeu-duo" element={<GameDuo />} />
         <Route path="*" element={<Navigate to="/" replace={true} />} />
