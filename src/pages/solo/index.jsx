@@ -53,7 +53,6 @@ const Solo = () => {
           className="welcomeSoloCtn__form--input"
           type="text"
           placeholder="pseudo"
-          minLength="3"
           value={user}
           onChange={handleChange}
         />

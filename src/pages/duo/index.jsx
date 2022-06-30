@@ -56,7 +56,6 @@ const Duo = () => {
           name="player1"
           type="text"
           placeholder="pseudo joueur 1"
-          minLength="3"
           value={users.player1}
           onChange={handleChange}
         />
@@ -65,7 +64,6 @@ const Duo = () => {
           name="player2"
           type="text"
           placeholder="pseudo joueur 2"
-          minLength="3"
           value={users.player2}
           onChange={handleChange}
         />

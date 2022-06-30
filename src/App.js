@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Welcome from "./pages/welcome";
 import Morpion from "./pages/morpion";
@@ -13,16 +12,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Welcome
-            // user={user}
-            // setUser={setUser}
-            // handleChange={handleChange}
-            />
-          }
-        />
+        <Route path="/" element={<Welcome />} />
         <Route path="/solo" element={<Solo />} />
         <Route path="/duo" element={<Duo />} />
         <Route path="/jeu" element={<Morpion />} />

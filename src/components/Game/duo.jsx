@@ -33,8 +33,6 @@ const GameDuo = () => {
     [2, 4, 6],
   ];
 
-  console.log("RENDU GAME");
-
   //----------------------------------------     Calcul gagnant // match nul     ------------------------------------------//
   function calculateWinner(squares) {
     for (let i = 0; i < lines.length; i++) {
