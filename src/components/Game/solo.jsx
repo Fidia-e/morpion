@@ -25,7 +25,7 @@ const GameSolo = () => {
     if (pseudo === null || pseudoOpponent === null) {
       navigate("/");
     }
-  }, []);
+  });
 
   const lines = [
     [0, 1, 2],

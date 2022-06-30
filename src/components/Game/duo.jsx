@@ -26,7 +26,7 @@ const GameDuo = () => {
     if (joueur1 === null || joueur2 === null) {
       navigate("/");
     }
-  }, []);
+  });
 
   const lines = [
     [0, 1, 2],
