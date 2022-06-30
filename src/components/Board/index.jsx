@@ -2,12 +2,12 @@
 import Square from "../Square";
 import "../../styles/index.scss";
 
-const Board = ({ squares, status, handleClick, xIsNext }) => {
+const Board = ({ squares, status, handleClick }) => {
   function renderSquare(i) {
     return (
       <Square
         value={squares[i]}
-        xIsNext={xIsNext}
+        status={status}
         onClick={() => handleClick(i)}
       />
     );
