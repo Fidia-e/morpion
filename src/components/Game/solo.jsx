@@ -70,12 +70,24 @@ const GameSolo = () => {
 
   // si deux cases côte à côte sont identiques dans lines, alors remplir la 3e avec "O"
 
-  function fillLine(line, player) {
-    const [a, b, c] = line;
-    if (squares[a] && squares[a] === squares[b]) {
-      squares[c] = player;
-    }
-  }
+  // let availableSquares = 0;
+
+  // function fillLine(line) {
+  //   for (let i = 0; i < lines.length; i++) {
+  //     const [a, b, c] = line;
+
+  //     if (squares[a] && squares[a] === squares[b]) {
+  //       availableSquares++;
+  //       squares[c] = "O";
+  //     } else if (squares[a] && squares[a] === squares[c]) {
+  //       availableSquares++;
+  //       squares[b] = "O";
+  //     } else if (squares[b] && squares[b] === squares[c]) {
+  //       availableSquares++;
+  //       squares[a] = "O";
+  //     }
+  //   }
+  // }
 
   //---------------------------------------------------   JEU   --------------------------------------------------------//
 
@@ -93,59 +105,80 @@ const GameSolo = () => {
     setStepNumber(historyCopy.length);
   }
 
-  if (xIsNext === false) {
-    const timer = setTimeout(() => {
-      const emptySquares = squaresCopy.filter((square) => square === null);
-      const randomEmptySquare = MathRandom(emptySquares.length, 1);
-      let availableSquares;
+  // fonction qui fait jouer l'ordinateur (random)
 
-      // récupérer la position des square vides
+  if (xIsNext === false) {
+    const timer = setTimeout((i) => {
+      const emptySquares = squaresCopy.filter((square) => square === null);
+      console.log("emptySquares:", emptySquares);
+      console.log(`${pseudoOpponent}`, "vient de cliquer");
+      const randomEmptySquare = MathRandom(emptySquares.length, 1);
+      let availableSquares = 0;
+      const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+      const [a, b, c] = lines[i];
+      console.log("lines:", lines);
+
+      // const [a, b, c] = lines[square];
+
+      // récupérer la position des squares vides
       // maper à la place de filter pour récupérer les index des squares vides
       // puis les remplir avec "O"
 
-      for (let square of squaresCopy) {
-        console.log(square);
-        if (squaresCopy[square] === null) {
+      for (let i = 0; i < lines.length; i++) {
+        console.log(i);
+        if (squaresCopy[i] === null) {
           availableSquares++;
 
           if (availableSquares === randomEmptySquare) {
-            squaresCopy[square] = "O";
-            // fillLine(lines[square], "O");
-
-            // for (let i of squaresCopy) {
-            //   const [a, b, c] = lines[i];
-            //   if ((squaresCopy[a] && squaresCopy[b]) === "X" || "O") {
-            //     squaresCopy[c] = "O";
-            //   }
-            // }
-
+            squaresCopy[i] = "O";
             setSquares(squaresCopy);
             setXIsNext(!xIsNext);
             break;
           }
         }
       }
+      if (squaresCopy[a] && squaresCopy[a] === squaresCopy[b]) {
+        squaresCopy[c] = "O";
+        setSquares(squaresCopy);
+        setXIsNext(!xIsNext);
+      }
+
+      if (squaresCopy[a] && squaresCopy[a] === squaresCopy[c]) {
+        squaresCopy[b] = "O";
+        setSquares(squaresCopy);
+        setXIsNext(!xIsNext);
+      }
+
+      if (squaresCopy[b] && squaresCopy[b] === squaresCopy[c]) {
+        squaresCopy[a] = "O";
+        setSquares(squaresCopy);
+        setXIsNext(!xIsNext);
+      }
 
       // for (let i = 0; i < lines.length; i++) {
-      //   console.log(i);
-      //   if (squaresCopy[i] === null) {
-      //     availableSquares++;
+      //   const [a, b, c] = lines[i];
+      //   console.log("lines:", lines);
 
-      //     if (availableSquares === randomEmptySquare) {
-      //       // squaresCopy[i] = "O";
-      //       fillLine(lines[i], "O");
-
-      //       // for (let i of squaresCopy) {
-      //       //   const [a, b, c] = lines[i];
-      //       //   if ((squaresCopy[a] && squaresCopy[b]) === "X" || "O") {
-      //       //     squaresCopy[c] = "O";
-      //       //   }
-      //       // }
-
-      //       setSquares(squaresCopy);
-      //       setXIsNext(!xIsNext);
-      //       break;
-      //     }
+      //   if (squaresCopy[a] && squaresCopy[a] === squaresCopy[b]) {
+      //     squaresCopy[c] = "O";
+      //   } else if (squaresCopy[a] && squaresCopy[a] === squaresCopy[c]) {
+      //     squaresCopy[b] = "O";
+      //   } else if (squaresCopy[b] && squaresCopy[b] === squaresCopy[c]) {
+      //     squaresCopy[a] = "O";
+      //   } else {
+      //     squaresCopy[i] = "O";
+      //     setSquares(squaresCopy);
+      //     setXIsNext(!xIsNext);
+      //     break;
       //   }
       // }
 
