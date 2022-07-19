@@ -146,6 +146,7 @@ const GameSolo = () => {
           }
         }
       }
+
       if (squaresCopy[a] && squaresCopy[a] === squaresCopy[b]) {
         squaresCopy[c] = "O";
         setSquares(squaresCopy);
