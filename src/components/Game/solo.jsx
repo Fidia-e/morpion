@@ -68,26 +68,14 @@ const GameSolo = () => {
     return true;
   }
 
-  // si deux cases côte à côte sont identiques dans lines, alors remplir la 3e avec "O"
+  // si deux cases d'une même ligne sont identiques, alors remplir la 3e avec "O"
+  // si A = B alors remplir C avec "O"
+  // si A = C alors remplir B avec "O"
+  // si B = C alors remplir A avec "O"
 
-  // let availableSquares = 0;
-
-  // function fillLine(line) {
-  //   for (let i = 0; i < lines.length; i++) {
-  //     const [a, b, c] = line;
-
-  //     if (squares[a] && squares[a] === squares[b]) {
-  //       availableSquares++;
-  //       squares[c] = "O";
-  //     } else if (squares[a] && squares[a] === squares[c]) {
-  //       availableSquares++;
-  //       squares[b] = "O";
-  //     } else if (squares[b] && squares[b] === squares[c]) {
-  //       availableSquares++;
-  //       squares[a] = "O";
-  //     }
-  //   }
-  // }
+  if (squares[0] === squares[1] && squares[0]) {
+    squares[2] = "O";
+  }
 
   //---------------------------------------------------   JEU   --------------------------------------------------------//
 
@@ -145,43 +133,25 @@ const GameSolo = () => {
             break;
           }
         }
+
+        if (squaresCopy[a] && squaresCopy[a] === squaresCopy[b]) {
+          squaresCopy[c] = "O";
+          // setSquares(squaresCopy);
+          // setXIsNext(!xIsNext);
+        }
+
+        if (squaresCopy[a] && squaresCopy[a] === squaresCopy[c]) {
+          squaresCopy[b] = "O";
+          // setSquares(squaresCopy);
+          // setXIsNext(!xIsNext);
+        }
+
+        if (squaresCopy[b] && squaresCopy[b] === squaresCopy[c]) {
+          squaresCopy[a] = "O";
+          // setSquares(squaresCopy);
+          // setXIsNext(!xIsNext);
+        }
       }
-
-      if (squaresCopy[a] && squaresCopy[a] === squaresCopy[b]) {
-        squaresCopy[c] = "O";
-        setSquares(squaresCopy);
-        setXIsNext(!xIsNext);
-      }
-
-      if (squaresCopy[a] && squaresCopy[a] === squaresCopy[c]) {
-        squaresCopy[b] = "O";
-        setSquares(squaresCopy);
-        setXIsNext(!xIsNext);
-      }
-
-      if (squaresCopy[b] && squaresCopy[b] === squaresCopy[c]) {
-        squaresCopy[a] = "O";
-        setSquares(squaresCopy);
-        setXIsNext(!xIsNext);
-      }
-
-      // for (let i = 0; i < lines.length; i++) {
-      //   const [a, b, c] = lines[i];
-      //   console.log("lines:", lines);
-
-      //   if (squaresCopy[a] && squaresCopy[a] === squaresCopy[b]) {
-      //     squaresCopy[c] = "O";
-      //   } else if (squaresCopy[a] && squaresCopy[a] === squaresCopy[c]) {
-      //     squaresCopy[b] = "O";
-      //   } else if (squaresCopy[b] && squaresCopy[b] === squaresCopy[c]) {
-      //     squaresCopy[a] = "O";
-      //   } else {
-      //     squaresCopy[i] = "O";
-      //     setSquares(squaresCopy);
-      //     setXIsNext(!xIsNext);
-      //     break;
-      //   }
-      // }
 
       return () => clearTimeout(timer);
     }, 1500);
