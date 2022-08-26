@@ -68,15 +68,6 @@ const GameSolo = () => {
     return true;
   }
 
-  // si deux cases d'une même ligne sont identiques, alors remplir la 3e avec "O"
-  // si A = B alors remplir C avec "O"
-  // si A = C alors remplir B avec "O"
-  // si B = C alors remplir A avec "O"
-
-  if (squares[0] === squares[1] && squares[0]) {
-    squares[2] = "O";
-  }
-
   //---------------------------------------------------   JEU   --------------------------------------------------------//
 
   function handleClick(i) {
@@ -93,63 +84,23 @@ const GameSolo = () => {
     setStepNumber(historyCopy.length);
   }
 
-  // fonction qui fait jouer l'ordinateur (random)
-
   if (xIsNext === false) {
-    const timer = setTimeout((i) => {
+    const timer = setTimeout(() => {
       const emptySquares = squaresCopy.filter((square) => square === null);
-      console.log("emptySquares:", emptySquares);
-      console.log(`${pseudoOpponent}`, "vient de cliquer");
       const randomEmptySquare = MathRandom(emptySquares.length, 1);
       let availableSquares = 0;
-      const lines = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-      ];
-      const [a, b, c] = lines[i];
-      console.log("lines:", lines);
 
-      // const [a, b, c] = lines[square];
-
-      // récupérer la position des squares vides
-      // maper à la place de filter pour récupérer les index des squares vides
-      // puis les remplir avec "O"
-
-      for (let i = 0; i < lines.length; i++) {
-        console.log(i);
+      for (let i = 0; i < squaresCopy.length; i++) {
         if (squaresCopy[i] === null) {
           availableSquares++;
 
           if (availableSquares === randomEmptySquare) {
             squaresCopy[i] = "O";
+
             setSquares(squaresCopy);
             setXIsNext(!xIsNext);
             break;
           }
-        }
-
-        if (squaresCopy[a] && squaresCopy[a] === squaresCopy[b]) {
-          squaresCopy[c] = "O";
-          // setSquares(squaresCopy);
-          // setXIsNext(!xIsNext);
-        }
-
-        if (squaresCopy[a] && squaresCopy[a] === squaresCopy[c]) {
-          squaresCopy[b] = "O";
-          // setSquares(squaresCopy);
-          // setXIsNext(!xIsNext);
-        }
-
-        if (squaresCopy[b] && squaresCopy[b] === squaresCopy[c]) {
-          squaresCopy[a] = "O";
-          // setSquares(squaresCopy);
-          // setXIsNext(!xIsNext);
         }
       }
 
@@ -157,8 +108,6 @@ const GameSolo = () => {
     }, 1500);
   } else {
   }
-
-  // * squares[a] && squares[a] === squares[b] && squares[a] === squares[c]
 
   //-----------------------------------------------   AFFICHAGE   ----------------------------------------------------//
 
